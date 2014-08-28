@@ -1,4 +1,4 @@
-ipython
+ipython[all]
 elpy
 epc
 jedi
