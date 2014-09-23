@@ -21,7 +21,7 @@ def test():
 
 if __name__ == '__main__':
     nose.run(
-        argv = [sys.argv[0],
-                sys.modules[__name__].__file__,
-                '-v']
+        argv=[sys.argv[0],
+              sys.modules[__name__].__file__,
+              '-v']
     )
