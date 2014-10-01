@@ -32,11 +32,11 @@ c.InteractiveShellApp.exec_lines = [
 
 # Enable GUI event loop integration ('qt', 'wx', 'gtk', 'glut', 'pyglet',
 # 'osx').
-# c.InteractiveShellApp.gui = None
+c.InteractiveShellApp.gui = 'qt'
 
 # Pre-load matplotlib and numpy for interactive use, selecting a particular
 # matplotlib backend and loop integration.
-# c.InteractiveShellApp.pylab = None
+c.InteractiveShellApp.pylab = 'qt'
 
 # If true, an 'import *' is done from numpy and pylab, when using pylab
 # c.InteractiveShellApp.pylab_import_all = True
@@ -80,11 +80,11 @@ c.InteractiveShellApp.exec_lines = [
 
 # Enable GUI event loop integration ('qt', 'wx', 'gtk', 'glut', 'pyglet',
 # 'osx').
-# c.TerminalIPythonApp.gui = None
+c.TerminalIPythonApp.gui = 'qt'
 
 # Pre-load matplotlib and numpy for interactive use, selecting a particular
 # matplotlib backend and loop integration.
-# c.TerminalIPythonApp.pylab = None
+c.TerminalIPythonApp.pylab = 'qt'
 
 # Suppress warning messages about legacy config files
 # c.TerminalIPythonApp.ignore_old_config = False
