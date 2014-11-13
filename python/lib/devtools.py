@@ -9,9 +9,15 @@ import inspect
 def debug_start():
     '''pdb.set_trace wrapper
     
+    Notes
+    -----
     Basically to handle Qt debugging. This allows
     Qt apps to be debugged without issue with the
     event loop.
+
+    Simply use this function instead of pdb.set_trace()
+
+    But, also see debug_stop.
     '''
 
     from pdb import set_trace
@@ -25,6 +31,8 @@ def debug_start():
 def debug_stop():
     '''Recover envionment after a debug_start
 
+    Notes
+    -----
     Basically to handle Qt debugging. When one is done
     debugging a Qt app, and one wished to continue the
     app, enter "from <whatever> import debug_stop"
