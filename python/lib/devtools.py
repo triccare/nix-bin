@@ -6,6 +6,37 @@ import inspect
 
 # Examination/debugging
 
+def debug_start():
+    '''pdb.set_trace wrapper
+    
+    Basically to handle Qt debugging. This allows
+    Qt apps to be debugged without issue with the
+    event loop.
+    '''
+
+    from pdb import set_trace
+    try:
+        from PyQt4.QtCore import pyqtRemoveInputHook
+        pyqtRemoveInputHook()
+    except NameError:
+        pass
+    set_trace()
+
+def debug_stop():
+    '''Recover envionment after a debug_start
+
+    Basically to handle Qt debugging. When one is done
+    debugging a Qt app, and one wished to continue the
+    app, enter "from <whatever> import debug_stop"
+    then "debug_stop()"
+    then "c<RET>" a number of times to enter back into the
+    event loop.
+    '''
+    try:
+        from PyQt4.QtCore import pyqtRestoreInputHook
+        pyqtRestoreInputHook()
+    except NameError:
+        pass
 
 def what(obj):
     """
@@ -44,7 +75,7 @@ def obj_search(needle, obj,
     '''Simple search of an object for all occurances of needle
     
     Parameters
-    ==========
+    ----------
     needle: type or object
             The thing to search for.
             
@@ -58,9 +89,16 @@ def obj_search(needle, obj,
                     If True, ignore attributes that start with '__'
                     
     Returns
-    =======
+    -------
     list: [obj,...]
           A list of objects found.
+
+    Notes
+    -----
+    This is really stupid and dirt naive. But for well-behaved classes,
+    works amazingly well.
+
+    Just don't do respect_system: your computer will hate you.
     '''
     
     result = []
