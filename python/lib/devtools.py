@@ -4,11 +4,20 @@
 import inspect
 
 
-# Examination/debugging
+# Examination/debugging wrt Qt
+
+def qt_what():
+    from PyQt4.QtCore import QT_VERSION_STR
+    from PyQt4.Qt import PYQT_VERSION_STR
+    from sip import SIP_VERSION_STR
+
+    print("Qt version:", QT_VERSION_STR)
+    print("SIP version:", SIP_VERSION_STR)
+    print("PyQt version:", PYQT_VERSION_STR)
 
 def debug_start():
     '''pdb.set_trace wrapper
-    
+
     Notes
     -----
     Basically to handle Qt debugging. This allows
@@ -81,21 +90,21 @@ def obj_search(needle, obj,
                respect_system=True,
                _ids=None):
     '''Simple search of an object for all occurances of needle
-    
+
     Parameters
     ----------
     needle: type or object
             The thing to search for.
-            
+
     obj: object
          The object to look through.
-         
+
     respect_privacy: bool
                      If True, ignore attributes that start with '_'
-    
+
     respect_system: bool
                     If True, ignore attributes that start with '__'
-                    
+
     Returns
     -------
     list: [obj,...]
@@ -108,30 +117,30 @@ def obj_search(needle, obj,
 
     Just don't do respect_system: your computer will hate you.
     '''
-    
+
     result = []
-    
+
     if not _ids:
         _ids = {}
-        
+
     kwargs = pack_kwargs()
-    
+
     # See if we've looked at this object already.
     obj_id = id(obj)
     if obj_id not in _ids:
         _ids[obj_id] = True
-        
+
         # Is object the type we're looking for
         if isinstance(obj, needle):
             result.append(obj)
-        
+
         # If iterable, go through all the items in the object.
         try:
             for itm in obj:
                 result.extend(obj_search(needle, itm, **kwargs))
         except Exception:
             pass
-        
+
         # Now go through all the attributes of the object, see what can be dug up
         for a in dir(obj):
             process = True
