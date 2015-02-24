@@ -1,3 +1,4 @@
+six
 ipython[all]
 elpy
 epc
