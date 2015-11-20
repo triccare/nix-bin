@@ -47,3 +47,10 @@
  * @class customjs
  * @static
  */
+// activate extensions only after Notebook is initialized
+require(["base/js/events"], function (events) {
+$([IPython.events]).on("app_initialized.NotebookApp", function () {
+    /* load your extension here */
+    IPython.load_extensions('usability/runtools/main')
+    });
+});

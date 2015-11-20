@@ -26,8 +26,8 @@ c = get_config()
 # lines of code to run at IPython startup.
 c.InteractiveShellApp.exec_lines = [
     'from devtools import *',
-#    '%load_ext autoreload',
-#    '%autoreload 1'
+    '%load_ext autoreload',
+    '%autoreload 2'
 ]
 
 # Enable GUI event loop integration ('qt', 'wx', 'gtk', 'glut', 'pyglet',
