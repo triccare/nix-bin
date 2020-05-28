@@ -4,17 +4,48 @@ import re
 
 from astropy.table import Table
 
-from jwst_tools.associations.association import make_timestamp
-from jwst_tools.associations.lib.rules_level3 import _DMS_POOLNAME_REGEX
+from jwst.associations import (
+    AssociationRegistry,
+    generate,
+    AssociationPool
+)
+from jwst.associations.association import make_timestamp
+from jwst.associations.lib.rules_level3 import _DMS_POOLNAME_REGEX
 
+__all__ = [
+    'all_programs',
+    'asngen',
+    'exam_program_pools',
+    'get_pools',
+    'make_poolname',
+    'make_timestamp',
+    'pool_combine',
+    'pool_exam',
+    'python_path',
+]
 
 logger = logging.getLogger(__name__)
-handler = logging.StreamHandler()
-handler.setFormatter(
-    logging.Formatter('%(levelname)s:%(name)s: %(message)s')
-)
-logger.addHandler(handler)
 logger.setLevel(logging.INFO)
+if not logger.handlers:
+    handler = logging.StreamHandler()
+    handler.setFormatter(
+        logging.Formatter('%(levelname)s:%(module)s.%(funcName)s: %(message)s')
+    )
+    logger.addHandler(handler)
+
+
+def asngen(pool):
+    """Default ASN generator for given pool"""
+    pool = AssociationPool.read(pool)
+    rules = AssociationRegistry()
+    (asns, orphaned) = generate(pool, rules)
+    result = []
+    result.append('There where {:d} associations found.'.format(len(asns)))
+    result.append('There where {:d} orphaned exposures.'.format(len(orphaned)))
+    for assocs in asns:
+        result.append(assocs.__str__())
+
+    return '\n'.join(result)
 
 
 def exam_program_pools(colname, program_path='.', latest=True):
@@ -37,7 +68,7 @@ def pool_exam(pool, colname):
     """Show the column from the pool file for specified program"""
     tbl = Table.read(pool, format='ascii')
     try:
-        logger.info(tbl[colname])
+        logger.info('\n'.join([' ', tbl[colname].__str__()]))
     except KeyError:
         logger.error('No column "{}" in pool "{}"'.format(colname, pool))
 
@@ -57,7 +88,7 @@ def all_programs(colname, path='.', latest=True):
     from os.path import isdir
     for fname in listdir(python_path(path)):
         if isdir(fname):
-            logger.info('\n>>>> Program {}:'.format(fname))
+            logger.info('>>>> Program {}:'.format(fname))
             try:
                 exam_program_pools(colname, program_path=fname, latest=latest)
             except IndexError:
