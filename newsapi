@@ -1,0 +1,6 @@
+#!/bin/bash
+source $HOME/.rvm/scripts/rvm
+cdnews
+cd hubble-news-api-rails-3
+rvm rvmrc load
+bundle exec guard -g varnished

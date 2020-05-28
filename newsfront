@@ -1,0 +1,6 @@
+#!/bin/bash
+source $HOME/.rvm/scripts/rvm
+cdnews
+cd newscenter_frontend
+rvm rvmrc load
+bundle exec rails s thin
