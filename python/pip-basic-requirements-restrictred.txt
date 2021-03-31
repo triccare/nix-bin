@@ -1,6 +1,0 @@
-pep8<1.6.0
-six
-ipython[all]
-elpy
-epc
-jedi
