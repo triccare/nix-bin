@@ -1,0 +1,9 @@
+{
+  "secure": false, 
+  "url": "http://localhost:8888/", 
+  "hostname": "localhost", 
+  "pid": 60947, 
+  "base_url": "/", 
+  "notebook_dir": "/Users/eisenham/Documents/ssbdev/cube-tools/notebooks", 
+  "port": 8888
+}

@@ -1,0 +1,60 @@
+#!/usr/bin/env python
+"""Kill processes that match regex"""
+import logging
+import psutil
+import re
+
+from script import Script
+
+# Configure logging
+logger = logging.getLogger(__name__)
+logger.addHandler(logging.NullHandler())
+
+
+class KillProcs(Script):
+    """Kill processes"""
+    def add_args(self):
+        """KillProcs arguments and options"""
+
+        self.add_argument('regex',
+                          help='Regex to match against process descriptions')
+
+    def main(self):
+        """Kill processes that match the given regex
+
+        Returns
+        -------
+        attempts : int
+            Number of attempted kills.
+        """
+        logger.info(f'Matching processes against "{self.args.regex}"')
+        regex = re.compile(self.args.regex)
+        attempts = 0
+
+        # Get this process to ensure it is not killed.
+        us = psutil.Process()
+        for process in psutil.process_iter():
+            if process.pid == us.pid:
+                continue
+            try:
+                cmdline = ' '.join(process.cmdline())
+            except (psutil.AccessDenied, psutil.ProcessLookupError, psutil.ZombieProcess) as exception:
+                logger.debug(f'Exception occured: {exception}')
+                continue
+            logger.debug(f'Checking command-line "{cmdline}"')
+            if regex.search(cmdline):
+                logger.info(f'Attempt killing process "{process}')
+                process.kill()
+                attempts += 1
+        logger.info(f'Attempted {attempts} kills.')
+        return attempts
+
+
+# #######
+# Command
+# #######
+if __name__ == '__main__':
+    logger.addHandler(logging.StreamHandler())
+
+    killprocs = KillProcs(logger=logger)
+    killprocs()

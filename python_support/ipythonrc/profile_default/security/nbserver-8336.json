@@ -1,0 +1,9 @@
+{
+  "secure": false, 
+  "url": "http://localhost:8889/", 
+  "hostname": "localhost", 
+  "pid": 8336, 
+  "base_url": "/", 
+  "notebook_dir": "/Users/eisenham/Documents/ssbdev/UserTraining2015", 
+  "port": 8889
+}

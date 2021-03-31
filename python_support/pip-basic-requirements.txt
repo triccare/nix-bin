@@ -1,0 +1,16 @@
+bokeh
+epc
+importmagic
+ipython
+iterm2
+jedi==0.17.2
+jupyter
+pep8
+pyflakes
+pylint
+pyobjc
+pytest-xdist
+python-language-server[all]
+ptvsd
+rope
+sphinx-autobuild

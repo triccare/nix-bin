@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# This hook is sourced after a new virtualenv is activated.
+
+pip install --upgrade -r $HOME/bin/python/pip-basic-requirements.txt
+
+
+# Load up the main PyQt bindings
+loadpyqt

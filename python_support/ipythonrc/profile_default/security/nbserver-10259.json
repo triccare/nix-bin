@@ -1,0 +1,9 @@
+{
+  "secure": false, 
+  "url": "http://localhost:8888/", 
+  "hostname": "localhost", 
+  "pid": 10259, 
+  "base_url": "/", 
+  "notebook_dir": "/Users/eisenham/Documents/ssbdev/testdata/jwst_da_sprint_testdata_mirror/sprint_cube_201505", 
+  "port": 8888
+}
