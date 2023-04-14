@@ -1,6 +1,6 @@
-pytest
-numpy
-scipy
-matplotlib
-pandas
 astropy
+astroquery
+matplotlib
+numpy
+pandas
+scipy

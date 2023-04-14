@@ -6,11 +6,15 @@ iterm2
 jedi==0.17.2
 jupyter
 pep8
+pip-review
+progress
 pyflakes
 pylint
 pyobjc
+pyright
+pysiaf
 pytest-xdist
-python-language-server[all]
+python-lsp-server
 ptvsd
 rope
 sphinx-autobuild

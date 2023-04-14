@@ -23,10 +23,10 @@ conda_activate {conda_env}
 
 CMDS = {
     'ADMIN': """
-pu {project}_project/{conda_env}
+pu {project}_project/{conda_env}_{project}
 """,
     'TEST': """
-pu {project}_project/{conda_env}
+pu {project}_project/{conda_env}_{project}
 """,
     'NOTEBOOK': """
 jupyter notebook --no-browser
